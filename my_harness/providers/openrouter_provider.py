@@ -1,12 +1,15 @@
 import os
 
-from openai import OpenAI
-
 from .base import LLMProvider
 
 
 class OpenRouterProvider(LLMProvider):
     def __init__(self, model=None, api_key=None):
+        try:
+            from openai import OpenAI
+        except ImportError as exc:
+            raise ImportError("OpenRouter provider requires: pip install openai") from exc
+
         self.client = OpenAI(
             api_key=api_key or os.getenv("OPENROUTER_API_KEY"),
             base_url="https://openrouter.ai/api/v1",

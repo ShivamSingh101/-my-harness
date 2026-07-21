@@ -2,13 +2,14 @@ import os
 
 from .openai_provider import OpenAIProvider
 from .openrouter_provider import OpenRouterProvider
-# from .google_provider import GoogleProvider
+from .google_provider import GoogleProvider
 
 
 SUPPORTED_PROVIDERS = {
     "openai": OpenAIProvider,
     "openrouter": OpenRouterProvider,
-    # "google": GoogleProvider,
+    "google": GoogleProvider,
+    "gemini": GoogleProvider,
 }
 
 
