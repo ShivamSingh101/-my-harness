@@ -13,7 +13,7 @@ from .tools.subagents import CreateSubagentTool
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Custom AI agent harness")
-    parser.add_argument("--provider", default=None, help="LLM provider, e.g. openai")
+    parser.add_argument("--provider", default=None, help="LLM provider, e.g. openai, google, openrouter")
     parser.add_argument("--model", default=None, help="Model name")
     parser.add_argument("--session", default=None, help="Existing session ID to resume")
     parser.add_argument("--list-sessions", action="store_true", help="List saved sessions")
@@ -36,6 +36,14 @@ def create_env_file(workspace):
         "LLM_PROVIDER=openai\n"
         "OPENAI_API_KEY=your_api_key_here\n"
         "OPENAI_MODEL=gpt-4o-mini\n"
+        "# For Google Gemini:\n"
+        "# LLM_PROVIDER=google\n"
+        "# GEMINI_API_KEY=your_gemini_key_here\n"
+        "# GEMINI_MODEL=gemini-2.5-flash\n"
+        "# For OpenRouter:\n"
+        "# LLM_PROVIDER=openrouter\n"
+        "# OPENROUTER_API_KEY=your_openrouter_key_here\n"
+        "# OPENROUTER_MODEL=anthropic/claude-3.5-sonnet\n"
         "# Optional:\n"
         "# MY_HARNESS_SYSTEM_PROMPT=C:/path/to/system.md\n"
         "# MY_HARNESS_USER_PROMPT=C:/path/to/prompt.md\n",
@@ -150,7 +158,12 @@ def main():
             run_model_setup(workspace)
             load_dotenv(workspace / ".env", override=True)
             args.provider = os.getenv("LLM_PROVIDER", "openai")
-            args.model = os.getenv("OPENAI_MODEL")
+            if args.provider == "openai":
+                args.model = os.getenv("OPENAI_MODEL")
+            elif args.provider in ["google", "gemini"]:
+                args.model = os.getenv("GEMINI_MODEL") or os.getenv("GOOGLE_MODEL")
+            elif args.provider == "openrouter":
+                args.model = os.getenv("OPENROUTER_MODEL")
             agent, provider_name = build_agent(args, workspace, store, session)
             print(f"Model updated. Provider: {provider_name}, model: {args.model}\n")
             continue
