@@ -1,0 +1,5 @@
+include README.md
+include .env.example
+recursive-include docs *.md
+recursive-include my_harness/prompts *.md
+recursive-include my_harness/skills *.md

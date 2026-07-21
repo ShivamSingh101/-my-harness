@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my-harness"
+version = "0.1.0"
+description = "A small pluggable AI agent harness with sessions and tools."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name = "Your Name" }
+]
+license = { text = "MIT" }
+dependencies = [
+  "openai>=1.0.0",
+  "python-dotenv>=1.0.0"
+]
+keywords = ["ai", "agent", "harness", "llm", "openai"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://example.com/my-harness"
+Repository = "https://example.com/my-harness.git"
+
+[project.scripts]
+my-harness = "my_harness.main:main"
+myharness = "my_harness.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["my_harness*"]
+
+[tool.setuptools.package-data]
+my_harness = ["prompts/*.md", "skills/*.md"]
