@@ -6,7 +6,7 @@ It has:
 
 - terminal CLI command: `my-harness`
 - pluggable LLM providers
-- OpenAI provider included
+- OpenAI, Google (Gemini), and OpenRouter providers included
 - session creation/resume/listing
 - session storage as JSON
 - tool-calling loop
@@ -130,17 +130,21 @@ Inside chat, use:
 /model
 ```
 
-Currently supported provider: `openai`.
+Currently supported providers: `openai`, `google` (or `gemini`), `openrouter`.
 
-OpenAI model choices shown by setup include:
+### Provider Configuration & Models:
 
-```text
-gpt-4o-mini
-gpt-4o
-gpt-4.1-mini
-gpt-4.1
-o4-mini
-```
+1. **OpenAI** (`LLM_PROVIDER=openai`)
+   - Env Vars: `OPENAI_API_KEY`, `OPENAI_MODEL`
+   - Models: `gpt-4o-mini`, `gpt-4o`, `gpt-4.1-mini`, `gpt-4.1`, `o4-mini`
+
+2. **Google Gemini** (`LLM_PROVIDER=google`)
+   - Env Vars: `GEMINI_API_KEY` (or `GOOGLE_API_KEY`), `GEMINI_MODEL`
+   - Models: `gemini-2.5-flash`, `gemini-2.5-pro`, `gemini-2.0-flash`, `gemini-1.5-flash`, `gemini-1.5-pro`
+
+3. **OpenRouter** (`LLM_PROVIDER=openrouter`)
+   - Env Vars: `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`
+   - Models: `anthropic/claude-3.5-sonnet`, `openai/gpt-4o-mini`, `google/gemini-2.5-flash`, `deepseek/deepseek-chat`, `meta-llama/llama-3.3-70b-instruct`
 
 If API keys are missing, chat will not start. The setup flow asks the user to paste the key first.
 
@@ -223,6 +227,8 @@ custom harness/
       base.py
       factory.py
       openai_provider.py
+      google_provider.py
+      openrouter_provider.py
     tools/
       __init__.py
       base.py

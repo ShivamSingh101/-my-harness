@@ -14,7 +14,8 @@ authors = [
 license = { text = "MIT" }
 dependencies = [
   "openai>=1.0.0",
-  "python-dotenv>=1.0.0"
+  "python-dotenv>=1.0.0",
+  "google-genai>=1.0.0"
 ]
 keywords = ["ai", "agent", "harness", "llm", "openai"]
 classifiers = [
