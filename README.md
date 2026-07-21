@@ -383,6 +383,14 @@ Install the wheel on another system:
 pip install dist/my_harness-0.1.0-py3-none-any.whl
 ```
 
+## Contributors
+
+See:
+
+```text
+CONTRIBUTORS.md
+```
+
 ## More docs
 
 See:
